@@ -39,7 +39,7 @@ K = 5
 P = numpy.random.rand(N,K)
 Q = numpy.random.rand(M,K)
 
-nP, nQ = matrix_factorization(R_pace, P, Q, 3)
+nP, nQ = matrix_factorization(R_pace, P, Q, 5)
 nR_pace = numpy.dot(nP, nQ.T)
 nP, nQ = matrix_factorization(R_OR, P, Q, 5)
 nR_OR = numpy.dot(nP, nQ.T)
