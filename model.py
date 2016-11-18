@@ -56,7 +56,35 @@ def full_update(url, df_pace, df_OR):
     df_OR = update_df(df_OR, team2, team1, team2_OR)
     return df_pace, df_OR
     
-def get_scores(team1, team2, predictions=predictions):
+def matrix_factorization(R, P, Q, K, steps=5000, alpha=0.0002, beta=0.02):
+    """
+    Stolen from:
+    http://www.quuxlabs.com/blog/2010/09/matrix-factorization-a-simple-tutorial-and-implementation-in-python/
+    """
+    Q = Q.T
+    for step in xrange(steps):
+        print step
+        for i in xrange(len(R)):
+            for j in xrange(len(R[i])):
+                if R[i][j] > 0:
+                    eij = R[i][j] - numpy.dot(P[i,:],Q[:,j])
+                    for k in xrange(K):
+                        P[i][k] = P[i][k] + alpha * (2 * eij * Q[k][j] - beta * P[i][k])
+                        Q[k][j] = Q[k][j] + alpha * (2 * eij * P[i][k] - beta * Q[k][j])
+        eR = numpy.dot(P,Q)
+        e = 0
+        for i in xrange(len(R)):
+            for j in xrange(len(R[i])):
+                if R[i][j] > 0:
+                    e = e + pow(R[i][j] - numpy.dot(P[i,:],Q[:,j]), 2)
+                    for k in xrange(K):
+                        e = e + (beta/2) * ( pow(P[i][k],2) + pow(Q[k][j],2) )
+        if e < 0.001:
+            break
+    return P, Q.T
+
+    
+def get_scores(team1, team2, predictions):
     team1s = predictions.loc[team1][team2]
     team2s = predictions.loc[team2][team1]
     print team1, team2
@@ -104,9 +132,14 @@ predictions = pd.DataFrame(predictions, index=teams, columns=teams )
 predictions.to_csv('predictions.csv')
 
 # Predict individual scores
-get_scores('NYK', 'WAS')
-get_scores('MIL', 'MIA')
-get_scores('POR', 'TOR')
-get_scores('PHI', 'MIN')
-get_scores('CHI', 'UTA')
+get_scores('ATL', 'CHO', predictions=predictions)
+get_scores('PHO', 'IND', predictions=predictions)
+get_scores('DET', 'CLE', predictions=predictions)
+get_scores('GSW', 'BOS', predictions=predictions)
+get_scores('POR', 'NOP', predictions=predictions)
+get_scores('BRK', 'OKC', predictions=predictions)
+get_scores('MEM', 'DAL', predictions=predictions)
+get_scores('TOR', 'DEN', predictions=predictions)
+get_scores('LAC', 'SAC', predictions=predictions)
+get_scores('SAS', 'LAL', predictions=predictions)
 
