@@ -1,6 +1,5 @@
 """
-
-
+Predicts NBA scores by matrix factorization.
 See readme for details.
 """
 
