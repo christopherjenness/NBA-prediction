@@ -45,6 +45,7 @@ class NBAModel:
             self.df_pace = pd.DataFrame(0, index=self.teams, columns=self.teams)
             self.df_OR = pd.DataFrame(0, index=self.teams, columns=self.teams)
             self.df_pace, self.df_OR = self.make_matrices()
+            self.write_matrices()
             self.soft_impute()
         self.predictions = self.get_predictions()
 
@@ -185,7 +186,9 @@ class NBAModel:
             predictions (pd.DataFrame): DataFrame of predictions
         """
         predictions = pd.read_csv('predictions.csv')
+        predictions['Unnamed: 0'] = self.teams
         predictions = predictions.set_index('Unnamed: 0')
+        predictions.columns = self.teams
         return predictions
 
     def get_scores(self, team1, team2):
@@ -206,13 +209,14 @@ class NBAModel:
         print(team1s, team2s)
         print('')
 
-model = NBAModel(update=True)
+model = NBAModel()
+model.write_mat
 model.get_scores('PHO', 'WAS')
 model.get_scores('GSW', 'IND')
 model.get_scores('MEM', 'CHO')
 model.get_scores('MIA', 'PHI')
 model.get_scores('HOU', 'DET')
-model.get_scores('ORL', 'MIA')
+model.get_scores('ORL', 'MIL')
 model.get_scores('BOS', 'MIN')
 model.get_scores('DAL', 'SAS')
 model.get_scores('TOR', 'LAC')
