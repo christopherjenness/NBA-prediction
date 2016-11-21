@@ -49,3 +49,18 @@ Like MMMF, this problem is non-convex.  However, it can be relaxed to the follow
 where a nuclear norm on **M**, ||**M**||<sub>*</sub> is used. This algorithm, called soft-impute, is studied extensively in:
 
 Mazumder, Rahul, Trevor Hastie, and Robert Tibshirani. "Spectral regularization algorithms for learning large incomplete matrices." Journal of machine learning research 11.Aug (2010): 2287-2322.
+
+##  Example Code
+
+To make predictions, use the following code:
+
+```python
+>> model = NBAModel(update=True)
+>> model.get_scores('PHO', 'WAS')
+PHO WAS
+92.9092883132 97.1806398788
+```
+
+which predicts the Suns will lose to the Wizards 93-97.  
+
+Note, scraping all the data required to run the algorithm is slow.  This only needs to be done the first time.  On subsequent models, you can use ```update=False``` to used the cached data.
