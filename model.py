@@ -209,7 +209,6 @@ class NBAModel:
         print('')
 
 model = NBAModel()
-model.write_mat
 model.get_scores('PHO', 'WAS')
 model.get_scores('GSW', 'IND')
 model.get_scores('MEM', 'CHO')
