@@ -1,2 +1,5 @@
 pandas == 0.17.1
 beautifulsoup4 == 4.5.1
+
+# Note: Also requires softImpute R package
+# install.packages('softImpute')
