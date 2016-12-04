@@ -64,3 +64,11 @@ PHO WAS
 which predicts the Suns will lose to the Wizards 93-97.  
 
 Note, scraping all the data required to run the algorithm is slow.  This only needs to be done the first time.  On subsequent models, you can use ```update=False``` to used the cached data.
+
+## Model Tuning and Test Error
+
+The optimization strategy above is parameterized by lambda, the extent of regularization.  Using a validation set (10% of sample), we determined 25 to be optimal value of lambda.
+
+![Imgur](http://i.imgur.com/bT7XUCJ.png)
+
+Using lambda = 25 on a held out test set, our model estimates a team's final score with an MSE of 6.7.  Not bad.
