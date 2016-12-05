@@ -33,6 +33,7 @@ class NBAModel:
         """
         self.urls = ["http://www.basketball-reference.com/leagues/NBA_2017_games-october.html",
                      "http://www.basketball-reference.com/leagues/NBA_2017_games-november.html"
+                     "http://www.basketball-reference.com/leagues/NBA_2017_games-december.html"
                     ]
         self.teams = ['ATL', 'BOS', 'BRK', 'CHO', 'CHI', 'CLE', 'DAL', 'DEN', 'HOU',
                       'DET', 'GSW', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN',
