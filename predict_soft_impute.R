@@ -17,10 +17,10 @@ class(df.pace) = 'numeric'
 class(df.OR) = 'numeric'
 
 # Soft-impute data
-fits.pace = softImpute(x=df.pace,trace=TRUE, type="svd", lambda=20, rank.max = 5)
+fits.pace = softImpute(x=df.pace,trace=TRUE, type="svd", lambda=25, rank.max = 10)
 pace = fits.pace$u %*% diag(fits.pace$d) %*% t(fits.pace$v)
 
-fits.OR=softImpute(x=df.OR,trace=TRUE, type="svd", lambda=20, rank.max = 5)
+fits.OR=softImpute(x=df.OR,trace=TRUE, type="svd", lambda=50, rank.max = 10)
 OR = fits.OR$u %*% diag(fits.OR$d) %*% t(fits.OR$v)
 
 # Compute and organize predictions
