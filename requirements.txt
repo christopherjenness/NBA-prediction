@@ -1,5 +1,7 @@
 pandas == 0.17.1
 beautifulsoup4 == 4.5.1
+lxml == 3.7.3
+html5lib == 0.999
 
 # Note: Also requires softImpute R package
 # install.packages('softImpute')

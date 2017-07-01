@@ -176,7 +176,7 @@ class NBAModel:
         Calls soft impute algorithm in R.
         Write predictions.csv
         """
-        subprocess.check_output(['Rscript', './predict_soft_impute.R'])
+        subprocess.check_output(['Rscript', './model/predict_soft_impute.R'])
 
     def get_predictions(self):
         """
@@ -185,7 +185,7 @@ class NBAModel:
         Returns:
             predictions (pd.DataFrame): DataFrame of predictions
         """
-        predictions = pd.read_csv('predictions.csv')
+        predictions = pd.read_csv('model/predictions.csv')
         predictions['Unnamed: 0'] = self.teams
         predictions = predictions.set_index('Unnamed: 0')
         predictions.columns = self.teams
