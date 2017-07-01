@@ -8,6 +8,6 @@ install:
     - pip install pytest
     - pip install pytest-cov
 # command to run tests
-script: python2 -m pytest --cov=.
+script: python2 -m pytest --cov=model
 after_success:
     - coveralls
