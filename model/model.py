@@ -1,6 +1,5 @@
 """
-Predicts NBA scores by matrix factorization.
-See readme for details.
+Predicts NBA scores with regularized matrix factorization.
 """
 
 import urllib2
@@ -73,7 +72,7 @@ class NBAModel:
         Extracts statistics from URL
 
         Args:
-            url (str): basketball-reference.com box score UnicodeTranslateError
+            url (str): basketball-reference.com box score
 
         Returns:
             stats (pd.DataFrame): DataFrame of statistics from game
