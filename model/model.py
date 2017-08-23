@@ -30,9 +30,10 @@ class NBAModel:
             update (bool): If True, update predictions DataFrame by rescraping and recomputing
                 all values.  Otherwise, just use the cached predictions DataFrame.
         """
+        self.update = update
         self.urls = ["http://www.basketball-reference.com/leagues/NBA_2017_games-october.html",
                      "http://www.basketball-reference.com/leagues/NBA_2017_games-november.html"
-                     "http://www.basketball-reference.com/leagues/NBA_2017_games-december.html"
+                     "http://www.basketball-reference.com/leaguaes/NBA_2017_games-december.html"
                     ]
         self.teams = ['ATL', 'BOS', 'BRK', 'CHO', 'CHI', 'CLE', 'DAL', 'DEN', 'HOU',
                       'DET', 'GSW', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN',
@@ -47,6 +48,9 @@ class NBAModel:
             self.write_matrices()
             self.soft_impute()
         self.predictions = self.get_predictions()
+
+    def __repr__(self):
+        return "NBAModel(update={update})".format(update=self.update)
 
     def get_urls(self):
         """
