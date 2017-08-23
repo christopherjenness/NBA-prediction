@@ -8,6 +8,7 @@ import subprocess
 import pandas as pd
 from bs4 import BeautifulSoup
 
+
 class NBAModel:
     """
     NBA model for predicting final scores.
@@ -33,13 +34,11 @@ class NBAModel:
         self.update = update
         self.urls = ["http://www.basketball-reference.com/leagues/NBA_2017_games-october.html",
                      "http://www.basketball-reference.com/leagues/NBA_2017_games-november.html"
-                     "http://www.basketball-reference.com/leaguaes/NBA_2017_games-december.html"
-                    ]
+                     "http://www.basketball-reference.com/leaguaes/NBA_2017_games-december.html"]
         self.teams = ['ATL', 'BOS', 'BRK', 'CHO', 'CHI', 'CLE', 'DAL', 'DEN', 'HOU',
                       'DET', 'GSW', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN',
                       'NOP', 'NYK', 'OKC', 'ORL', 'PHI', 'PHO', 'POR', 'SAC', 'SAS',
-                      'TOR', 'UTA', 'WAS'
-                     ]
+                      'TOR', 'UTA', 'WAS']
         self.box_urls = self.get_urls()
         if update:
             self.df_pace = pd.DataFrame(0, index=self.teams, columns=self.teams)
@@ -211,6 +210,7 @@ class NBAModel:
         print(team1, team2)
         print(team1s, team2s)
         print('')
+
 
 """
 Example Code:
