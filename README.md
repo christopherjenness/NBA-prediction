@@ -1,5 +1,5 @@
 # NBA-prediction
-![CI](https://travis-ci.org/christopherjenness/NBA-prediction.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/christopherjenness/NBA-prediction/badge.svg?branch=master)](https://coveralls.io/github/christopherjenness/NBA-prediction?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/christopherjenness/NBA-prediction/badge.svg?branch=master)](https://coveralls.io/github/christopherjenness/NBA-prediction?branch=master)
 
 Predicts scores of NBA games using matrix completion
 
