@@ -18,13 +18,13 @@ Hastie, Trevor, Robert Tibshirani, and Martin Wainwright. Statistical learning w
 
 The objective of MMMF is approximate an _m_ x _n_ matrix **Z** by factoring into 
 
-![Imgur](http://i.imgur.com/2tm9j8P.png)
+![1](equations/(1).gif)
 
 where **A** is an _m_ x _r_ matrix and **B** is an _n_ x _r_ matrix.  Effectively, this puts a rank constraint _r_ on the approximation **M**.
 
 This can be estimated by solving the following
 
-![Imgur](http://i.imgur.com/eB3O1mC.png)
+![2](equations/(2).gif)
 
 where Omega indicates that only the known values in **Z** should be taken into consideration.  Any unknown value is treated as zero.
 
@@ -34,19 +34,19 @@ While intuitive, this approach has a two of problems.  First, this is a two dime
 
 [SVD](https://en.wikipedia.org/wiki/Singular_value_decomposition), not explained here, can be used to provide a rank-q approximation of a matrix (**Z**) by constraining the rank of the SVD (**M**).  This amounts to the following optimization
 
-![Imgur](http://i.imgur.com/yseXNp9.png)
+![3](equations/(3).gif)
 
 If values are missing from **Z** then you can constrain **M** to correctly impute these values, while approximating the unknown values
 
-![Imgur](http://i.imgur.com/lPtwang.png)
+![4](equations/(4).gif)
 
 Where omega is the set of known values.  However, this problem is NP-hard and also leads to overfitting since the known values are required to be predicted exactly.  Instead, you can simultanously predict unknown values and approximate known values by solving the following optimization
 
-![Imgur](http://i.imgur.com/MNwBKvU.png)
+![5](equations/(5).gif)
 
 Like MMMF, this problem is non-convex.  However, it can be relaxed to the following convex optimization problem 
 
-![Imgur](http://i.imgur.com/lSu054f.png)
+![6](equations/(6).gif)
 
 where a nuclear norm on **M**, ||**M**||<sub>*</sub> is used. This algorithm, called soft-impute, is studied extensively in:
 
