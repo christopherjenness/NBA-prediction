@@ -18,31 +18,37 @@ class NBAModel:
     def __init__(self, update=False):
         """
         Attributes:
-            urls (list): list of basketball reference URLs of games to include in model
-                this needs to be manually updated
+            urls (list): list of basketball reference URLs of games
+                to include in model this needs to be manually updated
             teams (list): list of team canonical abbreviations
-            box_urls (list): list of URLs to box scores for games included in model
+            box_urls (list): list of URLs to box scores for games
+                included in model
             predictions (pd.DataFrame): DataFrame of predicted score.
-                Each entry is the predicted score that the team in the index will score against
-                each team in the columns. To predict a game, two lookups are required, one for
+                Each entry is the predicted score that the team in the
+                index will score against each team in the columns.
+                To predict a game, two lookups are required, one for
                 each team against the other.
 
         Args:
-            update (bool): If True, update predictions DataFrame by rescraping and recomputing
-                all values.  Otherwise, just use the cached predictions DataFrame.
+            update (bool): If True, update predictions DataFrame by
+                rescraping and recomputing all values.  Otherwise,
+                just use the cached predictions DataFrame.
         """
         self.update = update
         self.urls = ["http://www.basketball-reference.com/leagues/NBA_2017_games-october.html",
                      "http://www.basketball-reference.com/leagues/NBA_2017_games-november.html"
-                     "http://www.basketball-reference.com/leaguaes/NBA_2017_games-december.html"]
-        self.teams = ['ATL', 'BOS', 'BRK', 'CHO', 'CHI', 'CLE', 'DAL', 'DEN', 'HOU',
-                      'DET', 'GSW', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN',
-                      'NOP', 'NYK', 'OKC', 'ORL', 'PHI', 'PHO', 'POR', 'SAC', 'SAS',
-                      'TOR', 'UTA', 'WAS']
-        self.box_urls = self.get_urls()
+                     "http://www.basketball-reference.com/leagues/NBA_2017_games-december.html"]
+        self.teams = ['ATL', 'BOS', 'BRK', 'CHO', 'CHI', 'CLE',
+                      'DAL', 'DEN', 'HOU', 'DET', 'GSW', 'IND',
+                      'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN',
+                      'NOP', 'NYK', 'OKC', 'ORL', 'PHI', 'PHO',
+                      'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']
         if update:
-            self.df_pace = pd.DataFrame(0, index=self.teams, columns=self.teams)
-            self.df_OR = pd.DataFrame(0, index=self.teams, columns=self.teams)
+            self.box_urls = self.get_urls()
+            self.df_pace = pd.DataFrame(0, index=self.teams,
+                                        columns=self.teams)
+            self.df_OR = pd.DataFrame(0, index=self.teams,
+                                      columns=self.teams)
             self.df_pace, self.df_OR = self.make_matrices()
             self.write_matrices()
             self.soft_impute()
@@ -53,7 +59,8 @@ class NBAModel:
 
     def get_urls(self):
         """
-        Gets all URLs for box scores (basketball-reference.com) from current season
+        Gets all URLs for box scores (basketball-reference.com)
+            from current season.
 
         Returns:
             box_urls (list): list of box score URLs from basketball reference
@@ -111,17 +118,20 @@ class NBAModel:
 
     def extract_data(self, table):
         """
-        Extracts pace and offensive rating data from basketball-reference tables
+        Extracts pace and offensive rating data from basketball-
+            reference tables
 
         Args:
-            table (pd.DataFrame): table of statistics scraped from basketball-reference
-                contains advanced stats for a given games.
+            table (pd.DataFrame): table of statistics scraped from
+                basketball-reference contains advanced stats for a given games.
 
         Returns:
             team1 (str): Abbreviation of team1
             team2 (str): Abbreviation of team2
-            team1_OR (float): Offensive rating of team1 (points per 100 posessions)
-            team2_OR (float): Offensive rating of team2 (points per 100 posessions)
+            team1_OR (float): Offensive rating of team1 (points per
+                100 posessions)
+            team2_OR (float): Offensive rating of team2 (points per
+                100 posessions)
             pace (float): pace of game (possessions per game)
         """
         team1 = table.loc[2][0]
@@ -187,10 +197,10 @@ class NBAModel:
         Returns:
             predictions (pd.DataFrame): DataFrame of predictions
         """
-        predictions = pd.read_csv('model/predictions.csv')
-        predictions['Unnamed: 0'] = self.teams
-        predictions = predictions.set_index('Unnamed: 0')
-        predictions.columns = self.teams
+        predictions = (pd.read_csv('model/predictions.csv')
+                       .assign(**{'Unnamed: 0': self.teams})
+                       .set_index('Unnamed: 0')
+                       .rename(columns=self.teams))
         return predictions
 
     def get_scores(self, team1, team2):
@@ -210,7 +220,6 @@ class NBAModel:
         print(team1, team2)
         print(team1s, team2s)
         print('')
-
 
 """
 Example Code:
