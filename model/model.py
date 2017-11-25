@@ -36,7 +36,7 @@ class NBAModel:
         """
         self.update = update
         self.urls = ["http://www.basketball-reference.com/leagues/NBA_2017_games-october.html",
-                     "http://www.basketball-reference.com/leagues/NBA_2017_games-november.html"
+                     "http://www.basketball-reference.com/leagues/NBA_2017_games-november.html",
                      "http://www.basketball-reference.com/leagues/NBA_2017_games-december.html"]
         self.teams = ['ATL', 'BOS', 'BRK', 'CHO', 'CHI', 'CLE',
                       'DAL', 'DEN', 'HOU', 'DET', 'GSW', 'IND',
@@ -67,6 +67,7 @@ class NBAModel:
         """
         box_urls = []
         for url in self.urls:
+            print('****', url)
             response = urllib2.urlopen(url)
             html = response.read()
             soup = BeautifulSoup(html, 'html.parser')
@@ -221,8 +222,6 @@ class NBAModel:
         print(team1s, team2s)
         print('')
 
-"""
-Example Code:
 
 model = NBAModel(update=True)
 model.get_scores('PHO', 'WAS')
@@ -234,4 +233,4 @@ model.get_scores('ORL', 'MIL')
 model.get_scores('BOS', 'MIN')
 model.get_scores('DAL', 'SAS')
 model.get_scores('TOR', 'LAC')
-"""
+
