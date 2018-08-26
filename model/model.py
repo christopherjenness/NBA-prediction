@@ -200,8 +200,8 @@ class NBAModel:
         """
         predictions = (pd.read_csv('model/predictions.csv')
                        .assign(**{'Unnamed: 0': self.teams})
-                       .set_index('Unnamed: 0')
-                       .rename(columns=self.teams))
+                       .set_index('Unnamed: 0'))
+        predictions.columns = self.teams
         return predictions
 
     def get_scores(self, team1, team2):
