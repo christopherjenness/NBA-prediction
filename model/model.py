@@ -2,7 +2,7 @@
 Predicts NBA scores with regularized matrix factorization.
 """
 
-import urllib2
+from urllib.request import urlopen
 import pickle
 import subprocess
 import pandas as pd
@@ -68,7 +68,7 @@ class NBAModel:
         box_urls = []
         for url in self.urls:
             print('****', url)
-            response = urllib2.urlopen(url)
+            response = urlopen(url)
             html = response.read()
             soup = BeautifulSoup(html, 'html.parser')
             soup.find_all('a')
@@ -88,8 +88,9 @@ class NBAModel:
         Returns:
             stats (pd.DataFrame): DataFrame of statistics from game
         """
-        response = urllib2.urlopen(url)
+        response = urlopen(url)
         html = response.read()
+        html = html.decode("utf8")
         stat_html = html.replace('<!--', "")
         stat_html = stat_html.replace('-->', "")
         stats = pd.read_html(stat_html)
@@ -135,11 +136,11 @@ class NBAModel:
                 100 posessions)
             pace (float): pace of game (possessions per game)
         """
-        team1 = table.loc[2][0]
-        team2 = table.loc[3][0]
-        pace = table.loc[3][1]
-        team1_OR = table.loc[2][6]
-        team2_OR = table.loc[3][6]
+        team1 = table.loc[0][0]
+        team2 = table.loc[1][0]
+        pace = table.loc[1][1]
+        team1_OR = table.loc[0][6]
+        team2_OR = table.loc[1][6]
         return team1, team2, team1_OR, team2_OR, pace
 
     def full_update(self, url, df_pace, df_OR):
