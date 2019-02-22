@@ -94,6 +94,7 @@ class NBAModel:
         stat_html = html.replace('<!--', "")
         stat_html = stat_html.replace('-->', "")
         stats = pd.read_html(stat_html)
+        print(stats[-5])
         return stats[-5]
 
     def update_df(self, df, team1, team2, value):
@@ -136,11 +137,11 @@ class NBAModel:
                 100 posessions)
             pace (float): pace of game (possessions per game)
         """
-        team1 = table.loc[0][0]
-        team2 = table.loc[1][0]
-        pace = table.loc[1][1]
-        team1_OR = table.loc[0][6]
-        team2_OR = table.loc[1][6]
+        team1 = table.loc[2][0]
+        team2 = table.loc[3][0]
+        pace = table.loc[3][1]
+        team1_OR = table.loc[2][6]
+        team2_OR = table.loc[3][6]
         return team1, team2, team1_OR, team2_OR, pace
 
     def full_update(self, url, df_pace, df_OR):
