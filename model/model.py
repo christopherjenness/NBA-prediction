@@ -224,7 +224,7 @@ class NBAModel:
         print(team1s, team2s)
         print('')
 
-
+"""
 model = NBAModel(update=True)
 model.get_scores('PHO', 'WAS')
 model.get_scores('GSW', 'IND')
@@ -235,4 +235,4 @@ model.get_scores('ORL', 'MIL')
 model.get_scores('BOS', 'MIN')
 model.get_scores('DAL', 'SAS')
 model.get_scores('TOR', 'LAC')
-
+"""
