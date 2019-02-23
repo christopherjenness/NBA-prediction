@@ -35,9 +35,9 @@ class NBAModel:
                 just use the cached predictions DataFrame.
         """
         self.update = update
-        self.urls = ["http://www.basketball-reference.com/leagues/NBA_2017_games-october.html",
-                     "http://www.basketball-reference.com/leagues/NBA_2017_games-november.html",
-                     "http://www.basketball-reference.com/leagues/NBA_2017_games-december.html"]
+        self.urls = ["http://www.basketball-reference.com/leagues/NBA_2019_games-october.html",
+                     "http://www.basketball-reference.com/leagues/NBA_2019_games-november.html",
+                     "http://www.basketball-reference.com/leagues/NBA_2019_games-december.html"]
         self.teams = ['ATL', 'BOS', 'BRK', 'CHO', 'CHI', 'CLE',
                       'DAL', 'DEN', 'HOU', 'DET', 'GSW', 'IND',
                       'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN',
@@ -137,11 +137,11 @@ class NBAModel:
                 100 posessions)
             pace (float): pace of game (possessions per game)
         """
-        team1 = table.loc[2][0]
-        team2 = table.loc[3][0]
-        pace = table.loc[3][1]
-        team1_OR = table.loc[2][6]
-        team2_OR = table.loc[3][6]
+        team1 = table.loc[0][0]
+        team2 = table.loc[1][0]
+        pace = table.loc[1][1]
+        team1_OR = table.loc[0][6]
+        team2_OR = table.loc[1][6]
         return team1, team2, team1_OR, team2_OR, pace
 
     def full_update(self, url, df_pace, df_OR):
