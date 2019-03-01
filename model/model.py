@@ -183,8 +183,8 @@ class NBAModel:
         """
         Writes pace and offensive ratings csv files.
         """
-        self.df_pace.to_csv('pace.csv')
-        self.df_OR.to_csv('OR.csv')
+        self.df_pace.to_csv('./model/pace.csv')
+        self.df_OR.to_csv('./model/OR.csv')
 
     def soft_impute(self):
         """
