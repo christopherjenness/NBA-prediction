@@ -29,4 +29,4 @@ predictions = OR * pace / 100
 colnames(predictions) = colnames(df)
 rownames(predictions) = colnames(df)
 
-write.csv(predictions, 'predictions.csv')
+write.csv(predictions, './model/predictions.csv')
